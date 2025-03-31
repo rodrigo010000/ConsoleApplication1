@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
-
+R
 using namespace std;
 
 class MiembroClub {
@@ -27,7 +27,8 @@ public:
             archivo << nombre << "," << edad << "," << correo << "\n";
             archivo.close();
             cout << "Miembro guardado en el archivo." << endl;
-        } else {
+        }
+        else {
             cout << "No se pudo abrir el archivo para guardar." << endl;
         }
     }
@@ -48,7 +49,8 @@ public:
                 cout << "Nombre: " << nombre << ", Edad: " << edad << ", Correo: " << correo << endl;
             }
             archivo.close();
-        } else {
+        }
+        else {
             cout << "El archivo 'club.txt' no existe o no se pudo abrir." << endl;
         }
     }
@@ -74,7 +76,8 @@ public:
                 if (n == nombre) {
                     encontrado = true;
                     lineas.push_back(n + "," + to_string(nuevaEdad) + "," + nuevoCorreo);
-                } else {
+                }
+                else {
                     lineas.push_back(linea);
                 }
             }
@@ -89,13 +92,16 @@ public:
                     }
                     archivo.close();
                     cout << "Miembro " << nombre << " actualizado." << endl;
-                } else {
+                }
+                else {
                     cout << "No se pudo abrir el archivo para actualizar." << endl;
                 }
-            } else {
+            }
+            else {
                 cout << "No se encontró el miembro con el nombre " << nombre << "." << endl;
             }
-        } else {
+        }
+        else {
             cout << "El archivo 'club.txt' no existe o no se pudo abrir." << endl;
         }
     }
@@ -120,7 +126,8 @@ public:
                 // Si el nombre no coincide, agregamos la línea al vector
                 if (n != nombre) {
                     lineas.push_back(linea);
-                } else {
+                }
+                else {
                     encontrado = true;
                 }
             }
@@ -135,13 +142,16 @@ public:
                     }
                     archivo.close();
                     cout << "Miembro " << nombre << " eliminado." << endl;
-                } else {
+                }
+                else {
                     cout << "No se pudo abrir el archivo para eliminar." << endl;
                 }
-            } else {
+            }
+            else {
                 cout << "No se encontró el miembro con el nombre " << nombre << "." << endl;
             }
-        } else {
+        }
+        else {
             cout << "El archivo 'club.txt' no existe o no se pudo abrir." << endl;
         }
     }
@@ -163,59 +173,59 @@ int main() {
         cin >> opcion;
 
         switch (opcion) {
-            case 1:
-                // Agregar nuevo miembro
-                cout << "Ingrese el nombre del nuevo miembro: ";
-                cin.ignore(); // Para ignorar el salto de línea anterior
-                getline(cin, nombre);
-                cout << "Ingrese la edad: ";
-                cin >> edad;
-                cout << "Ingrese el correo: ";
-                cin.ignore(); // Para ignorar el salto de línea anterior
-                getline(cin, correo);
+        case 1:
+            // Agregar nuevo miembro
+            cout << "Ingrese el nombre del nuevo miembro: ";
+            cin.ignore(); // Para ignorar el salto de línea anterior
+            getline(cin, nombre);
+            cout << "Ingrese la edad: ";
+            cin >> edad;
+            cout << "Ingrese el correo: ";
+            cin.ignore(); // Para ignorar el salto de línea anterior
+            getline(cin, correo);
 
-                {
-                    MiembroClub nuevoMiembro(nombre, edad, correo);
-                    nuevoMiembro.guardarEnArchivo();
-                }
-                break;
+            {
+                MiembroClub nuevoMiembro(nombre, edad, correo);
+                nuevoMiembro.guardarEnArchivo();
+            }
+            break;
 
-            case 2:
-                // Mostrar miembros
-                cout << "\n--- Miembros en el club ---\n";
-                MiembroClub::leerDesdeArchivo();
-                break;
+        case 2:
+            // Mostrar miembros
+            cout << "\n--- Miembros en el club ---\n";
+            MiembroClub::leerDesdeArchivo();
+            break;
 
-            case 3:
-                // Actualizar miembro
-                cout << "Ingrese el nombre del miembro a actualizar: ";
-                cin.ignore(); // Para ignorar el salto de línea anterior
-                getline(cin, nombre);
-                cout << "Ingrese la nueva edad: ";
-                cin >> edad;
-                cout << "Ingrese el nuevo correo: ";
-                cin.ignore(); // Para ignorar el salto de línea anterior
-                getline(cin, correo);
+        case 3:
+            // Actualizar miembro
+            cout << "Ingrese el nombre del miembro a actualizar: ";
+            cin.ignore(); // Para ignorar el salto de línea anterior
+            getline(cin, nombre);
+            cout << "Ingrese la nueva edad: ";
+            cin >> edad;
+            cout << "Ingrese el nuevo correo: ";
+            cin.ignore(); // Para ignorar el salto de línea anterior
+            getline(cin, correo);
 
-                MiembroClub::actualizarMiembro(nombre, edad, correo);
-                break;
+            MiembroClub::actualizarMiembro(nombre, edad, correo);
+            break;
 
-            case 4:
-                // Eliminar miembro
-                cout << "Ingrese el nombre del miembro a eliminar: ";
-                cin.ignore(); // Para ignorar el salto de línea anterior
-                getline(cin, nombre);
+        case 4:
+            // Eliminar miembro
+            cout << "Ingrese el nombre del miembro a eliminar: ";
+            cin.ignore(); // Para ignorar el salto de línea anterior
+            getline(cin, nombre);
 
-                MiembroClub::eliminarMiembro(nombre);
-                break;
+            MiembroClub::eliminarMiembro(nombre);
+            break;
 
-            case 5:
-                cout << "Saliendo del programa...\n";
-                break;
+        case 5:
+            cout << "Saliendo del programa...\n";
+            break;
 
-            default:
-                cout << "Opción no válida. Intente nuevamente.\n";
-                break;
+        default:
+            cout << "Opción no válida. Intente nuevamente.\n";
+            break;
         }
     } while (opcion != 5);
 
