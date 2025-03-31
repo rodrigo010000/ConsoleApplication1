@@ -27,8 +27,7 @@ public:
             archivo << nombre << "," << edad << "," << correo << "\n";
             archivo.close();
             cout << "Miembro guardado en el archivo." << endl;
-        }
-        else {
+        } else {
             cout << "No se pudo abrir el archivo para guardar." << endl;
         }
     }
@@ -49,8 +48,7 @@ public:
                 cout << "Nombre: " << nombre << ", Edad: " << edad << ", Correo: " << correo << endl;
             }
             archivo.close();
-        }
-        else {
+        } else {
             cout << "El archivo 'club.txt' no existe o no se pudo abrir." << endl;
         }
     }
@@ -76,8 +74,7 @@ public:
                 if (n == nombre) {
                     encontrado = true;
                     lineas.push_back(n + "," + to_string(nuevaEdad) + "," + nuevoCorreo);
-                }
-                else {
+                } else {
                     lineas.push_back(linea);
                 }
             }
@@ -92,16 +89,13 @@ public:
                     }
                     archivo.close();
                     cout << "Miembro " << nombre << " actualizado." << endl;
-                }
-                else {
+                } else {
                     cout << "No se pudo abrir el archivo para actualizar." << endl;
                 }
-            }
-            else {
+            } else {
                 cout << "No se encontró el miembro con el nombre " << nombre << "." << endl;
             }
-        }
-        else {
+        } else {
             cout << "El archivo 'club.txt' no existe o no se pudo abrir." << endl;
         }
     }
@@ -126,8 +120,7 @@ public:
                 // Si el nombre no coincide, agregamos la línea al vector
                 if (n != nombre) {
                     lineas.push_back(linea);
-                }
-                else {
+                } else {
                     encontrado = true;
                 }
             }
@@ -142,46 +135,91 @@ public:
                     }
                     archivo.close();
                     cout << "Miembro " << nombre << " eliminado." << endl;
-                }
-                else {
+                } else {
                     cout << "No se pudo abrir el archivo para eliminar." << endl;
                 }
-            }
-            else {
+            } else {
                 cout << "No se encontró el miembro con el nombre " << nombre << "." << endl;
             }
-        }
-        else {
+        } else {
             cout << "El archivo 'club.txt' no existe o no se pudo abrir." << endl;
         }
     }
 };
 
 int main() {
-    // Crear un miembro y guardarlo en el archivo
-    MiembroClub miembro1("Juan Perez", 30, "juan.perez@email.com");
-    miembro1.guardarEnArchivo();
+    int opcion;
+    string nombre, correo;
+    int edad;
 
-    // Mostrar los miembros guardados
-    cout << "\nMiembros guardados:\n";
-    MiembroClub::leerDesdeArchivo();
+    do {
+        cout << "\n--- Menu del Club ---\n";
+        cout << "1. Agregar nuevo miembro\n";
+        cout << "2. Mostrar miembros\n";
+        cout << "3. Actualizar miembro\n";
+        cout << "4. Eliminar miembro\n";
+        cout << "5. Salir\n";
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
 
-    // Actualizar un miembro
-    cout << "\nActualizando miembro...\n";
-    MiembroClub::actualizarMiembro("Juan Perez", 31, "juan.perez@nuevoemail.com");
+        switch (opcion) {
+            case 1:
+                // Agregar nuevo miembro
+                cout << "Ingrese el nombre del nuevo miembro: ";
+                cin.ignore(); // Para ignorar el salto de línea anterior
+                getline(cin, nombre);
+                cout << "Ingrese la edad: ";
+                cin >> edad;
+                cout << "Ingrese el correo: ";
+                cin.ignore(); // Para ignorar el salto de línea anterior
+                getline(cin, correo);
 
-    // Mostrar los miembros después de la actualización
-    cout << "\nMiembros después de la actualización:\n";
-    MiembroClub::leerDesdeArchivo();
+                {
+                    MiembroClub nuevoMiembro(nombre, edad, correo);
+                    nuevoMiembro.guardarEnArchivo();
+                }
+                break;
 
-    // Eliminar un miembro
-    cout << "\nEliminando miembro...\n";
-    MiembroClub::eliminarMiembro("Juan Perez");
+            case 2:
+                // Mostrar miembros
+                cout << "\n--- Miembros en el club ---\n";
+                MiembroClub::leerDesdeArchivo();
+                break;
 
-    // Mostrar los miembros después de la eliminación
-    cout << "\nMiembros después de la eliminación:\n";
-    MiembroClub::leerDesdeArchivo();
+            case 3:
+                // Actualizar miembro
+                cout << "Ingrese el nombre del miembro a actualizar: ";
+                cin.ignore(); // Para ignorar el salto de línea anterior
+                getline(cin, nombre);
+                cout << "Ingrese la nueva edad: ";
+                cin >> edad;
+                cout << "Ingrese el nuevo correo: ";
+                cin.ignore(); // Para ignorar el salto de línea anterior
+                getline(cin, correo);
+
+                MiembroClub::actualizarMiembro(nombre, edad, correo);
+                break;
+
+            case 4:
+                // Eliminar miembro
+                cout << "Ingrese el nombre del miembro a eliminar: ";
+                cin.ignore(); // Para ignorar el salto de línea anterior
+                getline(cin, nombre);
+
+                MiembroClub::eliminarMiembro(nombre);
+                break;
+
+            case 5:
+                cout << "Saliendo del programa...\n";
+                break;
+
+            default:
+                cout << "Opción no válida. Intente nuevamente.\n";
+                break;
+        }
+    } while (opcion != 5);
 
     return 0;
 }
+
 
